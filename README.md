@@ -18,10 +18,10 @@ Smart Charge Station é um simulador de uma estação de totens de carregamento 
       - Sobrecarga 
       - Estresse 
 # Tabela de Membros e Divisão de Tarefas 
-    - Pedro Di Franciscoantonio Oliveira
+    - Pedro Di Francescantonio Oliveira
     - Fernanda Eleuterio Borges 
 # Tecnologias e Ferramentas Utilizadas
-    - Linguagem: C++ 
+    - Linguagem: Java
     - Interface: QT Creator
 # Conceitos Acadêmicos Utilizados
 # Instruções para a execução do projeto 
