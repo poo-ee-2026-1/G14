@@ -16,7 +16,7 @@ Smart Charge Station é um simulador de uma estação de totens de carregamento 
 
 01/06 - Apresentacao
 
-![imagem](main/imagem.png)
+![imagem](https://github.com/poo-ee-2026-1/G14/blob/main/imagem.jpeg)
 
 # Descrição do Problema
 # Motivação para solucionar o problema (dados que demonstrem que é relevante) 
