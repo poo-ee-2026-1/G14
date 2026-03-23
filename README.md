@@ -5,11 +5,17 @@ Smart Charge Station é um simulador de uma estação de totens de carregamento 
 
 # Cronograma
 06/04 - Fundamentos
+
 13/04 - Core + Simulador
+
 27/04 - Backend Base
+
 12/05 - Logica (Implementar Algoritmos)
+
 26/05 - Frontend
+
 01/06 - Apresentacao
+
 # Descrição do Problema
 # Motivação para solucionar o problema (dados que demonstrem que é relevante) 
 # Objetivo Geral (o produto final do projeto)
