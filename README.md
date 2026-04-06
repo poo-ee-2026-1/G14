@@ -40,18 +40,22 @@ Smart Charge Station é um simulador de uma estação de totens de carregamento 
     - Interface: QT Creator
 # Conceitos Acadêmicos Utilizados
 # Modelagem Inicial
-CORE 
 CLASSES 
+
 Aplication 
 GameLoop 
 TimeSystem 
 Appcontroler 
-	OBJETOS
+
+OBJETOS
+
 aplication (objeto principal da aplicação) 
 gameLoop (objeto responsável pelo loop principal) 
 timeSystem (objeto responsável pelo tempo da simulação)
 appControler (objeto intermediador entre frontend e backend) 
-	ENCAPSULAMENTO 
+
+ENCAPSULAMENTO
+
 Atributos
 running 
 targetFPS 
@@ -72,15 +76,14 @@ getSimulationTime
 processInput()
 startSimulation()
 resetSimulation()
-	ABSTRAÇÃO
+
+ABSTRAÇÃO
+
 Aplication abstraída como inicialização do sistema 
 GameLoop abstraído como ciclo contínuo de execução
 TimeSystem abstraído como controlar do tempo real e simulado
 Appcontroler abstraído como a ponte entre a interface e o simulador
-	HERANÇA
-Herança não obrigatória 
-	POLIMORFISMO 
-Polimorfismo não obrigatório
+
 # Arquivos
   - Código Fonte 
   - Diagramas UML 
