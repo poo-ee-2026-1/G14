@@ -40,67 +40,70 @@ Smart Charge Station é um simulador de uma estação de totens de carregamento 
     - Interface: QT Creator
 # Conceitos Acadêmicos Utilizados
 # Modelagem Inicial (Exemplo: Módulo Gerenciador de Frota)
-FLEET MANAGER
-	CLASSES
-		VehicleModel
-		Vehicle
-		FleetManager
-		VehicleStatus (enum)
-	OBJETOS
-		compactModel
-		sedanModel
-		suvModel
-		pickUpModel
-		fleetManager
-		generetedVehicles (lista de veículos gerados no ciclo) 
-	ENCAPSULAMENTO 
-		Atributos:
-			name 
-			batteryCapacity
-			maxChargingPower
-			idBASE
-			id
-			model 
-			color
-			currentEnery 
-			arrivalTime
-			chargingStartTime
-			chargingFinishTime
-			waitingTime
-			priorityScore
-			status
-			connectePoint
-			avaiableModels
-			colorOptions
-			maxVehiclesPerCycle
-			modelCounters
-		Métodos:
-			getName()
-			getBatteryCapacity()
-			getMaxChargingPower()
-			getIdBASE()
-			getStateOfCharge()
-			getEnergyNeeded()
-			startCharging()
-			stopCharging()
-			updateEnergy()
-			updateWaitingTime()
-			setPriorityScore()
-			getPiorityScore()
-			isFullyCharged()
-			generateVehicles()
-			createRandomVehicles()
-			generateArrivalDelay()
-	ABSTRAÇÃO
-		○ VehicleModel abstraído como a ficha técnica de um tipo de veículo
-		○ Vehicle abstraído como um veículo elétrico individual da simulação
-		○ FleetManager abstraído como o gerador da frota de veículos do ciclo
-		○ VehicleStatus abstraído como o estado do veículo no sistema
-	HERANÇA
-		Será aplicada em subclasses de VehicleModel como: CompactModel, SedanModel, SUVModel e PickupModel.
-
-  POLIMORFISMO 
-		Será aplicado em métodos diferentes para cada subclasse de VehicleModel.
+	## FLEET MANAGER
+	
+		### CLASSES
+			VehicleModel
+			Vehicle
+			FleetManager
+			VehicleStatus (enum)
+			
+		### OBJETOS
+			compactModel
+			sedanModel
+			suvModel
+			pickUpModel
+			fleetManager
+			generetedVehicles (lista de veículos gerados no ciclo) 
+			
+		### ENCAPSULAMENTO 
+			#### Atributos:
+				name 
+				batteryCapacity
+				maxChargingPower
+				idBASE
+				id
+				model 
+				color
+				currentEnery 
+				arrivalTime
+				chargingStartTime
+				chargingFinishTime
+				waitingTime
+				priorityScore
+				status
+				connectePoint
+				avaiableModels
+				colorOptions
+				maxVehiclesPerCycle
+				modelCounters
+			#### Métodos:
+				getName()
+				getBatteryCapacity()
+				getMaxChargingPower()
+				getIdBASE()
+				getStateOfCharge()
+				getEnergyNeeded()
+				startCharging()
+				stopCharging()
+				updateEnergy()
+				updateWaitingTime()
+				setPriorityScore()
+				getPiorityScore()
+				isFullyCharged()
+				generateVehicles()
+				createRandomVehicles()
+				generateArrivalDelay()
+		### ABSTRAÇÃO
+			○ VehicleModel abstraído como a ficha técnica de um tipo de veículo
+			○ Vehicle abstraído como um veículo elétrico individual da simulação
+			○ FleetManager abstraído como o gerador da frota de veículos do ciclo
+			○ VehicleStatus abstraído como o estado do veículo no sistema
+		### HERANÇA
+			Será aplicada em subclasses de VehicleModel como: CompactModel, SedanModel, SUVModel e PickupModel.
+	
+	  ### POLIMORFISMO 
+			Será aplicado em métodos diferentes para cada subclasse de VehicleModel.
 
 # Arquivos
   - Código Fonte 
