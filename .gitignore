@@ -1,0 +1,16 @@
+# Arquivos de compilação do Java
+echo "bin/
+out/
+.vscode/
+.settings/
+.classpath
+.project
+*.class" > .gitignore
+
+# Configurações locais do VS Code
+.vscode/
+.settings/
+.classpath
+.project
+.idea/
+*.iml
