@@ -1,15 +1,12 @@
 package backend.fleetmanager;
 
 // Classe que representa um veículo do tipo Sedan.
-//
-// Herda as características básicas da classe VehicleModel
-// e define os dados específicos de um Sedan.
 public class SedanModel
         extends VehicleModel {
 
-    // =========================
-    // CONSTANTES DO MODELO
-    // =========================
+// =========================
+// CONSTANTES DO MODELO
+// =========================
 
     // Nome do modelo
     private static final String MODEL_NAME =
@@ -27,9 +24,9 @@ public class SedanModel
     private static final String MODEL_CODE =
             "200";
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor padrão do Sedan
     public SedanModel() {

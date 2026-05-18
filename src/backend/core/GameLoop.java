@@ -2,13 +2,12 @@ package backend.core;
 
 import backend.config.SimulationConfig;
 
-// Classe responsável pelo loop
-// principal de execução
+// Classe responsável pelo loop principal de execução
 public class GameLoop {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Estado do loop
     private boolean running;
@@ -19,9 +18,9 @@ public class GameLoop {
     // Delay entre frames
     private final int FRAME_DELAY = SimulationConfig.FRAME_DELAY;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public GameLoop(
             AppController controller
@@ -34,9 +33,9 @@ public class GameLoop {
                 false;
     }
 
-    // =========================
-    // START
-    // =========================
+// =========================
+// START
+// =========================
 
     // Inicia execução
     public void start() {
@@ -50,9 +49,9 @@ public class GameLoop {
         run();
     }
 
-    // =========================
-    // LOOP PRINCIPAL
-    // =========================
+// =========================
+// LOOP PRINCIPAL
+// =========================
 
     private void run() {
 
@@ -66,27 +65,27 @@ public class GameLoop {
         }
     }
 
-    // =========================
-    // UPDATE
-    // =========================
+// =========================
+// UPDATE
+// =========================
 
     private void update() {
 
         controller.update();
     }
 
-    // =========================
-    // RENDER
-    // =========================
+// =========================
+// RENDER
+// =========================
 
     private void render() {
 
         controller.render();
     }
 
-    // =========================
-    // DELAY
-    // =========================
+// =========================
+// DELAY
+// =========================
 
     private void sleep() {
 
@@ -102,9 +101,9 @@ public class GameLoop {
         }
     }
 
-    // =========================
-    // STOP
-    // =========================
+// =========================
+// ENCERRAMENTO
+// =========================
 
     public void stop() {
 

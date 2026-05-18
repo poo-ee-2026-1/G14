@@ -9,18 +9,18 @@ import java.util.List;
 
 public class StationManager {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     private final List<ChargingPoint> chargingPoints;
     private final SmartQueue waitingQueue;
     private final EnergyManager energyManager;
     private final double energyPrice;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public StationManager() {
 
@@ -40,9 +40,9 @@ public class StationManager {
         );
     }
 
-    // =========================
-    // FILA
-    // =========================
+// =========================
+// FILA
+// =========================
 
     public void addVehicleToQueue(Vehicle vehicle) {
 
@@ -57,17 +57,17 @@ public class StationManager {
         return waitingQueue.getNextVehicle();
     }
 
-    // =========================
-    // CAPACIDADE
-    // =========================
+// =========================
+// CAPACIDADE
+// =========================
 
     public boolean hasCapacityFor(Vehicle vehicle) {
         return energyManager.canAcceptVehicle(chargingPoints, vehicle);
     }
 
-    // =========================
-    // PONTOS
-    // =========================
+// =========================
+// PONTOS
+// =========================
 
     public ChargingPoint getAvailablePoint() {
 
@@ -91,9 +91,9 @@ public class StationManager {
         return null;
     }
 
-    // =========================
-    // PROCESSAMENTO
-    // =========================
+// =========================
+// PROCESSAMENTO
+// =========================
 
     public void processChargingStart(Event event) {
 
@@ -117,17 +117,17 @@ public class StationManager {
         point.disconnectVehicle();
     }
 
-    // =========================
-    // REBALANCEAMENTO
-    // =========================
+// =========================
+// REBALANCEAMENTO
+// =========================
 
    public boolean rebalancePower() {
     return energyManager.rebalancePower(chargingPoints);
 }
 
-    // =========================
-    // RESET
-    // =========================
+// =========================
+// RESET
+// =========================
 
     public void reset() {
 
@@ -139,9 +139,9 @@ public class StationManager {
         }
     }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     public double getEnergyPrice() {
         return energyPrice;

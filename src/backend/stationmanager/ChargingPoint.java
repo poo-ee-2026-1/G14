@@ -2,14 +2,8 @@ package backend.stationmanager;
 
 import backend.fleetmanager.Vehicle;
 
-// Classe responsável por representar
-// um ponto físico de carregamento.
-//
-// Cada ChargingPoint:
-// - conecta um veículo
-// - entrega energia
-// - controla potência
-// - acompanha consumo energético
+// Classe responsável por representar um ponto físico de carregamento.
+
 public class ChargingPoint {
 
     // =========================
@@ -49,12 +43,11 @@ public class ChargingPoint {
         this.energyDelivered = 0.0;
     }
 
-    // =========================
+// =========================
 // RESERVA
 // =========================
 
 // Reserva o ponto sem conectar veículo ainda
-// Evita que dois eventos peguem o mesmo ponto
 public void reserve() {
 
     this.occupied = true;
@@ -63,9 +56,9 @@ public void release() {
 
     this.occupied = false;
 }
-    // =========================
-    // DISPONIBILIDADE
-    // =========================
+// =========================
+// DISPONIBILIDADE
+// =========================
 
 
     // Verifica se o ponto está livre
@@ -74,9 +67,9 @@ public void release() {
         return !occupied;
     }
 
-    // =========================
-    // CONEXÃO DE VEÍCULO
-    // =========================
+// =========================
+// CONEXÃO DE VEÍCULO
+// =========================
 
     // Conecta um veículo ao ponto
 // Conecta um veículo ao ponto
@@ -93,9 +86,9 @@ public void release() {
     }
 }
 
-    // =========================
-    // ENTREGA DE ENERGIA
-    // =========================
+// =========================
+// ENTREGA DE ENERGIA
+// =========================
 
     // Entrega energia ao veículo
     // com base no tempo da simulação
@@ -145,9 +138,9 @@ public void release() {
         }
     }
 
-    // =========================
-    // DESCONEXÃO
-    // =========================
+// =========================
+// DESCONEXÃO
+// =========================
 
     // Remove veículo conectado
     public void disconnectVehicle() {
@@ -159,9 +152,9 @@ public void release() {
         this.currentPower = 0.0;
     }
 
-    // =========================
-    // RESET
-    // =========================
+// =========================
+// RESET
+// =========================
 
     // Reinicia o ponto
     public void reset() {
@@ -171,9 +164,9 @@ public void release() {
         this.energyDelivered = 0.0;
     }
 
-    // =========================
-    // GETTERS E SETTERS
-    // =========================
+// =========================
+// GETTERS E SETTERS
+// =========================
 
     // Retorna ID do ponto
     public int getId() {

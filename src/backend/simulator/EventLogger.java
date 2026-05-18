@@ -7,30 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe responsável por registrar eventos da simulação.
-// Permite:
-// - armazenar logs
-// - exibir logs no console
-// - exportar logs para arquivo
+// Classe responsável por registrar eventos da simulação
 public class EventLogger {
 
-    // =========================
-    // CONSTANTES
-    // =========================
+// =========================
+// CONSTANTES
+// =========================
 
     // Prefixo padrão das mensagens
     private static final String LOG_PREFIX = "[LOG]: ";
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Lista que armazena os registros da simulação
     private final List<String> eventLog;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor padrão do logger
     public EventLogger() {
@@ -39,9 +35,9 @@ public class EventLogger {
         this.eventLog = new ArrayList<>();
     }
 
-    // =========================
-    // MÉTODOS PRINCIPAIS
-    // =========================
+// =========================
+// MÉTODOS PRINCIPAIS
+// =========================
 
     // Registra uma nova mensagem no sistema
     public void log(String message) {
@@ -96,9 +92,9 @@ public class EventLogger {
         }
     }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     // Retorna uma cópia da lista de logs
     public List<String> getLog() {

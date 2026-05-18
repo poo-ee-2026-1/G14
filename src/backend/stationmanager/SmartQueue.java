@@ -63,9 +63,9 @@ public void addVehicle(Vehicle vehicle) {
     addVehicle(vehicle, 0);
 }
 
-    // =========================
-    // REMOÇÃO
-    // =========================
+// =========================
+// REMOÇÃO
+// =========================
 
     // Retorna veículo de maior prioridade
     public Vehicle getNextVehicle() {
@@ -73,9 +73,9 @@ public void addVehicle(Vehicle vehicle) {
         return queue.poll();
     }
 
-    // =========================
-    // CÁLCULO DE PRIORIDADE
-    // =========================
+// =========================
+// CÁLCULO DE PRIORIDADE
+// =========================
 
     // Calcula score de prioridade
     public void calculatePriority(
@@ -121,9 +121,9 @@ public void addVehicle(Vehicle vehicle) {
         );
     }
 
-    // =========================
-    // REORDENAÇÃO
-    // =========================
+// =========================
+// REORDENAÇÃO
+// =========================
 
     // Atualiza prioridades
     // de todos os veículos
@@ -165,9 +165,9 @@ public void addVehicle(Vehicle vehicle) {
         queue.addAll(temp);
     }
 
-    // =========================
-    // UTILITÁRIOS
-    // =========================
+// =========================
+// UTILITÁRIOS
+// =========================
 
     // Verifica se fila está vazia
     public boolean isEmpty() {

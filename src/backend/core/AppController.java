@@ -3,13 +3,12 @@ package backend.core;
 import backend.config.SimulationConfig;
 import backend.simulator.Simulator;
 
-// Classe responsável por coordenar
-// os principais sistemas do projeto
+// Classe responsável por coordenar os principais sistemas do projeto
 public class AppController {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Simulador principal
     private final Simulator simulator;
@@ -17,9 +16,9 @@ public class AppController {
     // Sistema de tempo
     private final TimeSystem timeSystem;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public AppController() {
 
@@ -35,9 +34,9 @@ public class AppController {
         simulator.initializeSimulation();
     }
 
-    // =========================
-    // UPDATE
-    // =========================
+// =========================
+// UPDATE
+// =========================
 
     // Atualiza todos os sistemas
     public void update() {
@@ -62,9 +61,9 @@ public class AppController {
         );
     }
 
-    // =========================
-    // RENDER
-    // =========================
+// =========================
+// RENDER
+// =========================
 
     // Renderização futura da UI
     public void render() {

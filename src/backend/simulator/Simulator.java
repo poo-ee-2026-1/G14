@@ -7,18 +7,11 @@ import backend.stationmanager.ChargingPoint;
 import backend.stationmanager.StationManager;
 
 // Classe principal responsável por controlar toda a simulação.
-//
-// O Simulator:
-// - controla o tempo da simulação
-// - processa eventos
-// - coordena os módulos
-// - gerencia ciclos
-// - registra logs
 public class Simulator {
 
-    // =========================
-    // ATRIBUTOS DE ESTADO
-    // =========================
+// =========================
+// ATRIBUTOS DE ESTADO
+// =========================
 
     // Tempo atual acumulado da simulação
     private double simulationTime;
@@ -33,9 +26,9 @@ public class Simulator {
     @SuppressWarnings("unused")
     private double totalEnergyDelivered;
 
-    // =========================
-    // MÓDULOS DO SISTEMA
-    // =========================
+// =========================
+// MÓDULOS DO SISTEMA
+// =========================
 
     // Gerenciador da frota de veículos
     private final FleetManager fleetManager;
@@ -55,9 +48,9 @@ public class Simulator {
     // Indica se o ciclo está ativo
     private boolean cycleActive;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public Simulator() {
 
@@ -75,19 +68,17 @@ public class Simulator {
         this.cycleActive = false;
     }
 
-    // =========================
-    // LOOP PRINCIPAL DA SIMULAÇÃO
-    // =========================
+// =========================
+// LOOP PRINCIPAL DA SIMULAÇÃO
+// =========================
 
     // Avança a simulação processando todos os eventos
-    // que devem ocorrer até o tempo atual
     public void update(double deltaSimulationTime) {
 
         // Avança o relógio da simulação
         this.simulationTime += deltaSimulationTime;
 
-        // Processa todos os eventos pendentes
-        // até o tempo atual
+        // Processa todos os eventos pendentes até o tempo atual
         while (
                 !eventQueue.isEmpty()
                 &&
@@ -100,9 +91,9 @@ public class Simulator {
         }
     }
 
-    // =========================
-    // CONTROLE DA SIMULAÇÃO
-    // =========================
+// =========================
+// CONTROLE DA SIMULAÇÃO
+// =========================
 
     // Inicializa a simulação e agenda chegadas
     public void initializeSimulation() {
@@ -146,12 +137,11 @@ public class Simulator {
         cycleActive = false;
     }
 
-    // =========================
-    // AGENDAMENTO DE CHEGADAS
-    // =========================
+// =========================
+// AGENDAMENTO DE CHEGADAS
+// =========================
 
     // Agenda a chegada de todos os veículos
-    // em intervalos fixos definidos na config
     private void scheduleArrivals() {
 
     double time = 0;
@@ -171,9 +161,9 @@ public class Simulator {
     }
     }
 
-    // =========================
-    // PROCESSAMENTO DE EVENTOS
-    // =========================
+// =========================
+// PROCESSAMENTO DE EVENTOS
+// =========================
 
     public void processEvent(Event event) {
 
@@ -272,8 +262,7 @@ public class Simulator {
                 // Incrementa contador
                 vehiclesServed++;
 
-                // Tenta conectar próximo da fila
-                // no ponto que ficou livre
+                // Tenta conectar próximo da fila no ponto que ficou livre
                 Vehicle next = stationManager.getNextInQueue();
 
                 if (next != null) {
@@ -303,8 +292,6 @@ public class Simulator {
             "[Rebalanceamento] Potência redistribuída:"
         );
 
-        // Não é possível acessar diretamente os pontos
-        // de carregamento a partir do StationManager atual.
         eventLogger.log(
             "  Estado dos totens atualizado."
         );
@@ -323,9 +310,9 @@ public class Simulator {
         }
     }
 
-    // =========================
-    // AGENDAMENTO DE EVENTOS
-    // =========================
+// =========================
+// AGENDAMENTO DE EVENTOS
+// =========================
 
     public void scheduleEvent(Event event) {
 
@@ -339,12 +326,11 @@ public class Simulator {
         );
     }
 
-    // =========================
-    // CONEXÃO IMEDIATA
-    // =========================
+// =========================
+// CONEXÃO IMEDIATA
+// ========================
 
     // Tenta agendar START_CHARGING imediatamente
-    // se houver ponto livre disponível
 private void tryStartCharging(
         Vehicle vehicle,
         double currentTime
@@ -372,7 +358,6 @@ private void tryStartCharging(
     }
 
     // Totem livre e capacidade disponível
-    // — reserva e agenda carregamento
     point.reserve();
 
     scheduleEvent(new Event(
@@ -382,9 +367,9 @@ private void tryStartCharging(
             point.getId()
     ));
 }
-    // =========================
-    // RELATÓRIOS
-    // =========================
+// =========================
+// RELATÓRIOS
+// =========================
 
     public void generateReport() {
 
@@ -393,9 +378,9 @@ private void tryStartCharging(
         }
     }
 
-    // =========================
-    // RESET DO SISTEMA
-    // =========================
+// =========================
+// RESET DO SISTEMA
+// =========================
 
     public void reset() {
 

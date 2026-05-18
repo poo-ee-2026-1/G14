@@ -12,7 +12,7 @@ public class Main {
         Application application =
                 new Application();
 
-        // Inicia sistema
+        // Inicia o sistema
         application.start();
     }
 }

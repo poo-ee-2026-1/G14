@@ -1,23 +1,12 @@
 package backend.fleetmanager;
 
-// Classe abstrata responsável por representar
-// um modelo de veículo elétrico.
-//
-// Um VehicleModel descreve características
-// compartilhadas entre vários veículos.
-//
-// Exemplos:
-// - bateria
-// - potência máxima
-// - categoria
-//
-// Classes filhas podem especializar
-// comportamentos específicos.
+// Classe abstrata responsável por representar um modelo de veículo elétrico.
+
 public abstract class VehicleModel {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Nome do modelo
     private final String name;
@@ -34,9 +23,9 @@ public abstract class VehicleModel {
     // CMP, SUV, TRK
     private final String modelCode;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor base do modelo
     public VehicleModel(
@@ -67,9 +56,9 @@ public abstract class VehicleModel {
         this.modelCode = modelCode;
     }
 
-    // =========================
-    // MÉTODOS ABSTRATOS
-    // =========================
+// =========================
+// MÉTODOS 
+// =========================
 
 
     // Cada modelo deve possuir
@@ -77,21 +66,12 @@ public abstract class VehicleModel {
     public abstract String
     getModelDescription();
 
-    // =========================
+// =========================
 // CONTADOR DE INSTÂNCIAS
 // =========================
 
-// Contador individual por modelo
-// static garante que é compartilhado
-// entre todas as instâncias do mesmo tipo
 private int instanceCount = 0;
 
-// Gera o próximo ID para um veículo deste modelo
-//
-// Exemplo com CompactModel (base 100):
-//   1° veículo → 10001
-//   2° veículo → 10002
-//   3° veículo → 10003
 public int generateNextId() {
 
     instanceCount++;
@@ -107,9 +87,9 @@ public void resetInstanceCount() {
     instanceCount = 0;
 }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     // Retorna nome do modelo
     public String getName() {

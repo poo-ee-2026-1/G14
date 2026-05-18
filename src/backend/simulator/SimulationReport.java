@@ -7,11 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe responsável por armazenar
-// os resultados e estatísticas da simulação.
-//
-// O relatório funciona como um resumo final
-// da execução do sistema.
+// Classe responsável por armazenar os resultados e estatísticas da simulação.
 public final class SimulationReport {
 
     // =========================
@@ -34,14 +30,12 @@ public final class SimulationReport {
     private double simulationDuration;
 
     // Lista contendo resumo dos veículos
-    //
     // Temporariamente utilizando String
-    // até a classe VehicleSummary existir
     private List<String> vehicleSummaries = new ArrayList<>();;
 
-    // =========================
-    // CONSTRUTOR PADRÃO
-    // =========================
+// =========================
+// CONSTRUTOR PADRÃO
+// =========================
 
     // Cria relatório vazio
     public SimulationReport() {
@@ -50,9 +44,9 @@ public final class SimulationReport {
         reset();
     }
 
-    // =========================
-    // CONSTRUTOR COMPLETO
-    // =========================
+// =========================
+// CONSTRUTOR COMPLETO
+// =========================
 
     // Cria relatório já preenchido
     public SimulationReport(
@@ -82,9 +76,9 @@ public final class SimulationReport {
 
     }
 
-    // =========================
-    // GERAÇÃO DE RELATÓRIO
-    // =========================
+// =========================
+// GERAÇÃO DE RELATÓRIO
+// =========================
 
     // Gera relatório textual formatado
     public String generateReport() {
@@ -135,9 +129,9 @@ public final class SimulationReport {
         return report.toString();
     }
 
-    // =========================
-    // VEÍCULOS
-    // =========================
+// =========================
+// VEÍCULOS
+// =========================
 
     // Adiciona resumo de um veículo
     public void addVehicleSummary(
@@ -147,9 +141,9 @@ public final class SimulationReport {
         vehicleSummaries.add(summary);
     }
 
-    // =========================
-    // EXPORTAÇÃO
-    // =========================
+// =========================
+// EXPORTAÇÃO
+// =========================
 
     // Exporta relatório para arquivo
     public void exportToFile(
@@ -185,9 +179,9 @@ public final class SimulationReport {
         }
     }
 
-    // =========================
-    // RESET
-    // =========================
+// =========================
+// RESET
+// =========================
 
     // Reinicia todos os dados do relatório
     public void reset() {

@@ -2,13 +2,12 @@ package backend.core;
 
 import backend.config.SimulationConfig;
 
-// Classe responsável pelo
-// gerenciamento temporal
+// Classe responsável pelo gerenciamento temporal
 public class TimeSystem {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Tempo acumulado
     private double simulationTime;
@@ -41,9 +40,9 @@ public class TimeSystem {
                 SimulationConfig.TIME_SCALE;
     }
 
-    // =========================
-    // UPDATE
-    // =========================
+// =========================
+// UPDATE
+// =========================
 
     // Atualiza tempo da simulação
     public void update(
@@ -62,9 +61,9 @@ public class TimeSystem {
                 deltaSimulationTime;
     }
 
-    // =========================
-    // CONFIGURAÇÃO TEMPORAL
-    // =========================
+// =========================
+// CONFIGURAÇÃO TEMPORAL
+// =========================
 
     // Define escala temporal
     public void setTimeScale(
@@ -82,9 +81,9 @@ public class TimeSystem {
         }
     }
 
-    // =========================
-    // RESET
-    // =========================
+// =========================
+// RESET
+// =========================
 
     // Reinicia relógio
     public void reset() {
@@ -96,9 +95,9 @@ public class TimeSystem {
                 0.0;
     }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     public double
     getSimulationTime() {

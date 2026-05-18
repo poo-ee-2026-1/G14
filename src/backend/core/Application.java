@@ -1,12 +1,11 @@
 package backend.core;
 
-// Classe responsável por inicializar
-// e iniciar o sistema principal
+// Classe responsável por inicializar e iniciar o sistema principal
 public class Application {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Loop principal do sistema
     private final GameLoop gameLoop;
@@ -14,9 +13,9 @@ public class Application {
     // Controlador principal
     private final AppController appController;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public Application() {
 
@@ -29,9 +28,9 @@ public class Application {
                 new GameLoop(appController);
     }
 
-    // =========================
-    // MÉTODOS
-    // =========================
+// =========================
+// MÉTODOS
+// =========================
 
     // Inicia aplicação
     public void start() {
@@ -44,9 +43,9 @@ public class Application {
         gameLoop.start();
     }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     public AppController
     getAppController() {

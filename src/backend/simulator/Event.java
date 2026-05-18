@@ -4,8 +4,6 @@ package backend.simulator;
 import backend.fleetmanager.Vehicle;
 
 // Classe que representa um evento ocorrido na simulação.
-// Eventos são utilizados para controlar ações importantes
-// dentro do sistema.
 public class Event implements Comparable<Event>{
 
     // =========================

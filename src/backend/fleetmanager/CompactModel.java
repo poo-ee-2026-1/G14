@@ -1,15 +1,12 @@
 package backend.fleetmanager;
 
 // Classe que representa um veículo compacto.
-//
-// Herda características básicas de VehicleModel
-// e especializa os dados do modelo compacto.
 public class CompactModel
         extends VehicleModel {
 
-    // =========================
-    // CONSTANTES DO MODELO
-    // =========================
+// =========================
+// CONSTANTES DO MODELO
+// =========================
 
     // Nome do modelo
     private static final String MODEL_NAME =
@@ -27,9 +24,9 @@ public class CompactModel
     private static final String MODEL_CODE =
             "100";
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor padrão do modelo compacto
     public CompactModel() {
@@ -43,9 +40,9 @@ public class CompactModel
         );
     }
 
-    // =========================
-    // POLIMORFISMO
-    // =========================
+// =========================
+// POLIMORFISMO
+// =========================
 
     // Descrição especializada do modelo
     @Override

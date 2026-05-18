@@ -1,6 +1,6 @@
 package backend.simulator;
 
-// Enum responsável por representar todos os tipos possíveis de eventos da simulação.
+// Enum responsável por representar todos os tipos possíveis de eventos da simulação
 public enum EventType {
 
     // Evento disparado quando um veículo chega à estação de carregamento

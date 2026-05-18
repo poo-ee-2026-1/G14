@@ -1,17 +1,12 @@
 package backend.fleetmanager;
 
-// Classe que representa um veículo
-// do tipo Caminhonete/Pickup.
-//
-// Herda VehicleModel e define
-// características específicas
-// de uma caminhonete elétrica.
+// Classe que representa um veículo do tipo Caminhonete.
 public class PickupModel
         extends VehicleModel {
 
-    // =========================
-    // CONSTANTES DO MODELO
-    // =========================
+// =========================
+// CONSTANTES DO MODELO
+// =========================
 
     // Nome do modelo
     private static final String MODEL_NAME =
@@ -29,9 +24,9 @@ public class PickupModel
     private static final String MODEL_CODE =
             "400";
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor padrão da caminhonete
     public PickupModel() {
@@ -46,9 +41,9 @@ public class PickupModel
         );
     }
 
-    // =========================
-    // POLIMORFISMO
-    // =========================
+// =========================
+// POLIMORFISMO
+// =========================
 
     // Retorna uma descrição
     // específica da caminhonete.

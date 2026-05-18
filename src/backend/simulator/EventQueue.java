@@ -3,23 +3,20 @@ package backend.simulator;
 // Importa fila de prioridade do Java
 import java.util.PriorityQueue;
 
-// Classe responsável por armazenar e organizar
-// os eventos futuros da simulação.
-//
-// Os eventos são ordenados automaticamente
-// pelo timestamp.
+// Classe responsável por armazenar e organizar os eventos futuros da simulação.
+
 public class EventQueue {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Fila de prioridade dos eventos
     private final PriorityQueue<Event> events;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+//CONSTRUTOR
+// =========================
 
     // Construtor padrão da fila de eventos
     public EventQueue() {
@@ -28,9 +25,9 @@ public class EventQueue {
         this.events = new PriorityQueue<>();
     }
 
-    // =========================
-    // MÉTODOS PRINCIPAIS
-    // =========================
+// =========================
+// MÉTODOS PRINCIPAIS
+// =========================
 
     // Adiciona um novo evento à fila
     public void addEvent(Event event) {

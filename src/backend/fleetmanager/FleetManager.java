@@ -5,19 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-// Classe responsável por gerenciar
-// a frota de veículos da simulação.
-//
-// O FleetManager:
-// - armazena modelos disponíveis
-// - gera veículos aleatórios
-// - define opções de cores
-// - centraliza criação da frota
+// Classe responsável por gerenciar a frota de veículos da simulação.
 public class FleetManager {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Lista de modelos disponíveis
     // para geração de veículos
@@ -39,9 +32,9 @@ public class FleetManager {
     //Lista de veículos final do ciclo
     private final List<Vehicle> vehicles;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Inicializa o FleetManager
     public FleetManager() {
@@ -71,9 +64,9 @@ public class FleetManager {
         generateFleet();
     }
 
-    // =========================
-    // CONFIGURAÇÃO PADRÃO
-    // =========================
+// =========================
+// CONFIGURAÇÃO PADRÃO
+// =========================
 
     // Carrega modelos e cores padrão
     private void loadDefaultModelsAndColors() {
@@ -104,9 +97,9 @@ public class FleetManager {
         );
     }
 
-    // =========================
-    // GERAÇÃO DE VEÍCULOS
-    // =========================
+// =========================
+// GERAÇÃO DE VEÍCULOS
+// =========================
         private void generateFleet() {
 
     for (int i = 1; i <= maxVehiclesPerCycle; i++) {
@@ -168,9 +161,9 @@ public class FleetManager {
 );
     }
 
-    // =========================
-    // RESET
-    // =========================
+// =========================
+// RESET
+// =========================
 
     // Reinicia dados do FleetManager
     //
@@ -186,9 +179,9 @@ public class FleetManager {
     generateFleet();
 }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     // Retorna lista de veículos da frota
 public List<Vehicle> getVehicles() {

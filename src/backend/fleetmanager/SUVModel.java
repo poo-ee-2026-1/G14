@@ -1,15 +1,12 @@
 package backend.fleetmanager;
 
 // Classe que representa um veículo do tipo SUV.
-//
-// Especializa a classe VehicleModel
-// com características de um SUV elétrico.
 public class SUVModel
         extends VehicleModel {
 
-    // =========================
-    // CONSTANTES DO MODELO
-    // =========================
+// =========================
+// CONSTANTES DO MODELO
+// =========================
 
     // Nome do modelo
     private static final String MODEL_NAME =
@@ -27,9 +24,9 @@ public class SUVModel
     private static final String MODEL_CODE =
             "300";
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor padrão do SUV
     public SUVModel() {
@@ -44,9 +41,9 @@ public class SUVModel
         );
     }
 
-    // =========================
-    // POLIMORFISMO
-    // =========================
+// =========================
+// POLIMORFISMO
+// =========================
 
     // Retorna descrição especializada
     // para veículos SUV.

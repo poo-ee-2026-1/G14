@@ -4,13 +4,12 @@ import backend.fleetmanager.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe responsável pela
-// distribuição de potência
+// Classe responsável pela distribuição de potência
 public class EnergyManager {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Potência máxima da estação
     private final double stationMaxPower;
@@ -18,9 +17,9 @@ public class EnergyManager {
     // Pontos ativos
     private final List<ChargingPoint> activePoints;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     public EnergyManager(
             List<ChargingPoint> points,
@@ -69,9 +68,9 @@ public boolean canAcceptVehicle(
 
     return totalDemand <= stationMaxPower;
 }
-    // =========================
-    // REBALANCEAMENTO
-    // =========================
+// =========================
+// REBALANCEAMENTO
+// =========================
 
     // Redistribui potência aproveitando
     // excedente de carros com limite baixo

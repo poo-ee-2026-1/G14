@@ -2,23 +2,13 @@ package backend.fleetmanager;
 
 import backend.config.SimulationConfig;
 
-// Classe que representa um veículo elétrico
-// dentro da simulação.
-//
-// O veículo possui:
-// - bateria
-// - prioridade
-// - estado atual
-// - informações do modelo
-//
-// Implements Comparable para permitir
-// ordenação em filas de prioridade.
+// Classe que representa um veículo elétrico dentro da simulação.
 public class Vehicle
         implements Comparable<Vehicle> {
 
-    // =========================
-    // ATRIBUTOS
-    // =========================
+// =========================
+// ATRIBUTOS
+// =========================
 
     // Identificador único do veículo
     private final int id;
@@ -44,9 +34,9 @@ public class Vehicle
     // Score usado na fila de prioridade
     private double priorityScore;
 
-    // =========================
-    // CONSTRUTOR
-    // =========================
+// =========================
+// CONSTRUTOR
+// =========================
 
     // Construtor completo do veículo
     public Vehicle(
@@ -74,12 +64,10 @@ public class Vehicle
                 );
 
         // Veículo inicia chegando
-        this.status =
-                VehicleStatus.ARRIVING;
+        this.status = VehicleStatus.ARRIVING;
 
         // Define tempo de chegada
-        this.arrivalTime =
-                arrivalTime;
+        this.arrivalTime = arrivalTime;
 
         // Tempo inicial de espera
         this.waitingTime = 0.0;
@@ -88,13 +76,10 @@ public class Vehicle
         this.priorityScore = 0.0;
     }
 
-    // =========================
-    // ORDENAÇÃO
-    // =========================
+// =========================
+// ORDENAÇÃO
+// =========================
 
-    // Método utilizado pela PriorityQueue
-    // para ordenar veículos.
-    //
     // Maior prioridade vem primeiro.
     @Override
     public int compareTo(
@@ -121,9 +106,9 @@ public class Vehicle
         );
     }
 
-    // =========================
-    // TEMPO DE ESPERA
-    // =========================
+// =========================
+// TEMPO DE ESPERA
+// =========================
 
     // Atualiza tempo de espera do veículo
     public void updateWaitingTime(
@@ -141,9 +126,9 @@ public class Vehicle
         }
     }
 
-    // =========================
-    // CARREGAMENTO
-    // =========================
+// =========================
+// CARREGAMENTO
+// =========================
 
     // Define início do carregamento
     public void startCharging(
@@ -184,8 +169,7 @@ public void finishCharging() {
 
     this.stateOfCharge = 100.0;
 
-    this.status =
-            VehicleStatus.FINISHED;
+    this.status = VehicleStatus.FINISHED;
 }
 
     // =========================
@@ -267,9 +251,9 @@ public void finishCharging() {
         }
     }
 
-    // =========================
-    // GETTERS
-    // =========================
+// =========================
+// GETTERS
+// =========================
 
     public int getId() {
 
@@ -306,9 +290,9 @@ public void finishCharging() {
         return priorityScore;
     }
 
-    // =========================
-    // SETTERS CONTROLADOS
-    // =========================
+// =========================
+// SETTERS
+// =========================
 
     // Atualiza estado de carga
     public void setStateOfCharge(
