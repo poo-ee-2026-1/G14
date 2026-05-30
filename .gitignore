@@ -1,16 +1,25 @@
-# Arquivos de compilação do Java
-echo "bin/
+# Diretórios de compilação
+target/
+bin/
 out/
-.vscode/
-.settings/
-.classpath
-.project
-*.class" > .gitignore
 
-# Configurações locais do VS Code
-.vscode/
-.settings/
+# Arquivos compilados
+*.class
+
+# Eclipse
 .classpath
 .project
+.settings/
+
+# IntelliJ
 .idea/
 *.iml
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Maven Wrapper (opcional)
+.mvn/wrapper/maven-wrapper.jar

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="150.0" spacing="10.0" style="-fx-background-color: #1e232b; -fx-background-radius: 8px; -fx-padding: 10px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ChargingPointCardController">
+   <children>
+      <Label fx:id="lblNomePosto" text="Ponto #X" />
+      <Label fx:id="lblStatusPosto" text="Livre" />
+      <Label fx:id="lblPotenciaPosto" text="0.0 kW" />
+   </children>
+</VBox>
