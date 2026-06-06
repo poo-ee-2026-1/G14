@@ -40,7 +40,10 @@ public class SedanModel
     }
 
     // POLIMORFISMO
- 
+ @Override
+public int getVisualIndex() {
+    return 2;
+}
 
     // Sobrescreve o método da superclasse
     @Override

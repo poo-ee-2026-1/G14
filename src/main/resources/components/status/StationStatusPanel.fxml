@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="frontend.controllers.StationStatusPanelController">
+
+    <GridPane hgap="15"
+              alignment="CENTER">
+
+        <columnConstraints>
+            <ColumnConstraints percentWidth="16.66"/>
+            <ColumnConstraints percentWidth="16.66"/>
+            <ColumnConstraints percentWidth="16.66"/>
+            <ColumnConstraints percentWidth="16.66"/>
+            <ColumnConstraints percentWidth="16.66"/>
+            <ColumnConstraints percentWidth="16.66"/>
+        </columnConstraints>
+
+        <!-- FILA -->
+
+        <VBox GridPane.columnIndex="0"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconFila"
+                           fitWidth="22"
+                           fitHeight="22"
+                           preserveRatio="true"/>
+
+                <Label text="Veículos na Fila"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblFila"
+                   text="0"
+                   style="
+                       -fx-text-fill:#00B7FF;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+        <!-- CARREGANDO -->
+
+        <VBox GridPane.columnIndex="1"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconCarregando"
+                           fitWidth="32"
+                           fitHeight="32"
+                           preserveRatio="true"/>
+
+                <Label text="Carros Carregando"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblCarregando"
+                   text="0"
+                   style="
+                       -fx-text-fill:#39FF14;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+        <!-- ENERGIA -->
+
+        <VBox GridPane.columnIndex="2"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconEnergia"
+                           fitWidth="22"
+                           fitHeight="22"
+                           preserveRatio="true"/>
+
+                <Label text="Energia Entregue"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblEnergia"
+                   text="0 kWh"
+                   style="
+                       -fx-text-fill:#FFD54A;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+        <!-- POTÊNCIA -->
+
+        <VBox GridPane.columnIndex="3"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconPotencia"
+                           fitWidth="22"
+                           fitHeight="22"
+                           preserveRatio="true"/>
+
+                <Label text="Potência Atual"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblPotencia"
+                   text="0 kW"
+                   style="
+                       -fx-text-fill:#4CAF50;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+        <!-- RECEITA -->
+
+        <VBox GridPane.columnIndex="4"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconReceita"
+                           fitWidth="22"
+                           fitHeight="22"
+                           preserveRatio="true"/>
+
+                <Label text="Receita Estimada"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblReceita"
+                   text="R$ 0,00"
+                   style="
+                       -fx-text-fill:#B388FF;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+        <!-- TEMPO -->
+
+        <VBox GridPane.columnIndex="5"
+              spacing="10"
+              prefHeight="100"
+              style="
+                -fx-background-color:#1B1F27;
+                -fx-background-radius:18;
+                -fx-border-radius:18;
+                -fx-border-color:#2A3240;
+                -fx-border-width:1;
+                -fx-padding:14;
+              ">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+
+                <ImageView fx:id="iconTempo"
+                           fitWidth="22"
+                           fitHeight="22"
+                           preserveRatio="true"/>
+
+                <Label text="Tempo da Simulação"
+                       wrapText="true"
+                       style="
+                           -fx-text-fill:white;
+                           -fx-font-size:13px;
+                       "/>
+
+            </HBox>
+
+            <Label fx:id="lblTempo"
+                   text="00:00:00"
+                   style="
+                       -fx-text-fill:#FFD54A;
+                       -fx-font-size:20px;
+                       -fx-font-weight:bold;
+                   "/>
+
+        </VBox>
+
+    </GridPane>
+
+</VBox>

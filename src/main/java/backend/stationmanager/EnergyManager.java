@@ -1,136 +1,58 @@
 package backend.stationmanager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import backend.fleetmanager.Vehicle;
 
-// Classe responsável pela distribuição de potência
 public class EnergyManager {
 
-// ATRIBUTOS
-
-    // Potência máxima da estação
     private final double stationMaxPower;
 
-    // Pontos ativos
-    private final List<ChargingPoint> activePoints;
-
-// CONSTRUTOR
-
-    public EnergyManager(
-            List<ChargingPoint> points,
-            double stationMaxPower
-    ) {
-
+    public EnergyManager(double stationMaxPower) {
         this.stationMaxPower = stationMaxPower;
-
-        this.activePoints = new ArrayList<>();
     }
 
-// VERIFICAÇÃO DE CAPACIDADE
+    public boolean canAcceptVehicle(List<ChargingPoint> points, Vehicle newVehicle) {
 
-// Verifica se a estação consegue aceitar mais um veículo sem prejudicar os atuais.
+        double total = 0;
 
-public boolean canAcceptVehicle(
-        List<ChargingPoint> points,
-        Vehicle newVehicle
-) {
-
-    double totalDemand = 0;
-
-    for (ChargingPoint point : points) {
-
-        if (
-            point.isOccupied()
-            &&
-            point.getConnectedVehicle() != null
-        ) {
-
-            totalDemand +=
-                point.getConnectedVehicle()
-                     .getModel()
-                     .getMaxChargingPower();
+        for (ChargingPoint p : points) {
+            if (p.isOccupied() && p.getConnectedVehicle() != null) {
+                total += p.getConnectedVehicle().getModel().getMaxChargingPower();
+            }
         }
+
+        total += newVehicle.getModel().getMaxChargingPower();
+
+        return total <= stationMaxPower;
     }
 
-    totalDemand +=
-        newVehicle.getModel()
-                  .getMaxChargingPower();
-
-    return totalDemand <= stationMaxPower;
-}
-// REBALANCEAMENTO
-
-    // Redistribui potência aproveitando excedente de carros com limite baixo
     public boolean rebalancePower(List<ChargingPoint> points) {
 
-    activePoints.clear();
+        int active = 0;
 
-    for (ChargingPoint point : points) {
-
-        if (point.isOccupied() && point.getConnectedVehicle() != null) {
-            activePoints.add(point);
+        for (ChargingPoint p : points) {
+            if (p.isOccupied()) active++;
         }
-    }
 
-    if (activePoints.isEmpty()) {
-        return false;
-    }
+        if (active == 0) return false;
 
-        // Potência disponível para distribuir
-        double remainingPower = stationMaxPower;
+        double fairShare = stationMaxPower / active;
 
-        // Pontos que ainda podem receber mais
-        List<ChargingPoint> needsMore =
-                new ArrayList<>(activePoints);
+        for (ChargingPoint p : points) {
 
-        // Distribui em loop até não sobrar excedente
-        while (!needsMore.isEmpty() && remainingPower > 0) {
-
-            // Parte justa para cada ponto restante
-            double fairShare =
-                    remainingPower / needsMore.size();
-
-            // Pontos que não conseguem absorver a parte justa — vão devolver excedente
-            List<ChargingPoint> saturated =
-                    new ArrayList<>();
-
-            for (ChargingPoint point : needsMore) {
-
-                Vehicle vehicle =
-                        point.getConnectedVehicle();
-
-                double maxPower =
-                        vehicle.getModel()
-                                .getMaxChargingPower();
-
-                // Carro não consegue absorver a parte justa — satura
-                if (maxPower <= fairShare) {
-
-                    point.setCurrentPower(maxPower);
-
-                    remainingPower -= maxPower;
-
-                    saturated.add(point);
-                }
+            if (!p.isOccupied()) {
+                p.setCurrentPower(0);
+                continue;
             }
 
-            // Se nenhum saturou, distribui o restante igualmente e encerra
-            if (saturated.isEmpty()) {
+            Vehicle v = p.getConnectedVehicle();
 
-                for (ChargingPoint point : needsMore) {
+            double max = v.getModel().getMaxChargingPower();
 
-                    point.setCurrentPower(fairShare);
-                }
-
-                break;
-            }
-
-            // Remove saturados da próxima rodada
-            needsMore.removeAll(saturated);
-
+            p.setCurrentPower(Math.min(max, fairShare));
         }
-        return false;
+
+        return true;
     }
 }

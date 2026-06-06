@@ -1,0 +1,32 @@
+.progress-bar {
+
+    -fx-background-color: transparent;
+}
+
+.progress-bar .track {
+
+    -fx-background-color: #0f1720;
+    -fx-background-radius: 12;
+}
+
+.progress-bar .bar {
+
+    -fx-background-color: #39FF14;
+    -fx-background-radius: 12;
+}
+
+.list-view {
+    -fx-background-color: #12161c;
+    -fx-control-inner-background: #12161c;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #39FF14;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #1b2a3a;
+}

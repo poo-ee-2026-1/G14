@@ -10,14 +10,10 @@ import backend.simulator.Event;
 
 public class StationManager {
 
-// ATRIBUTOS
-
     private final List<ChargingPoint> chargingPoints;
     private final SmartQueue waitingQueue;
     private final EnergyManager energyManager;
     private final double energyPrice;
-
-// CONSTRUTOR
 
     public StationManager() {
 
@@ -32,34 +28,18 @@ public class StationManager {
         this.energyPrice = SimulationConfig.ENERGY_PRICE;
 
         this.energyManager = new EnergyManager(
-                chargingPoints,
                 SimulationConfig.STATION_MAX_POWER
         );
     }
 
-// FILA
-
-    public void addVehicleToQueue(Vehicle vehicle) {
-
-        if (vehicle == null) return;
-
-        vehicle.setStatus(VehicleStatus.WAITING);
-
-        waitingQueue.addVehicle(vehicle);
+    public List<ChargingPoint> getChargingPoints() {
+        return chargingPoints;
     }
-
-    public Vehicle getNextInQueue() {
-        return waitingQueue.getNextVehicle();
-    }
-
-// CAPACIDADE
 
     public boolean hasCapacityFor(Vehicle vehicle) {
         return energyManager.canAcceptVehicle(chargingPoints, vehicle);
     }
 
-
-// PONTOS
     public ChargingPoint getAvailablePoint() {
 
         for (ChargingPoint point : chargingPoints) {
@@ -72,17 +52,11 @@ public class StationManager {
     }
 
     public ChargingPoint getPointById(int id) {
-
-        for (ChargingPoint point : chargingPoints) {
-            if (point.getId() == id) {
-                return point;
-            }
-        }
-
-        return null;
+        return chargingPoints.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
-
-// PROCESSAMENTO
 
     public void processChargingStart(Event event) {
 
@@ -93,48 +67,66 @@ public class StationManager {
 
         point.connectVehicle(vehicle);
         vehicle.setStatus(VehicleStatus.CHARGING);
+
+        rebalancePower();
+
+        System.out.println(
+                "[START] Veiculo " + vehicle.getId() +
+                " conectado no ponto " + point.getId()
+        );
     }
 
-    public void processChargingEnd(Event event) {
+    public boolean rebalancePower() {
+        boolean ok = energyManager.rebalancePower(chargingPoints);
+        printPowerDistribution();
+        return ok;
+    }
 
-        ChargingPoint point = getPointById(event.getChargingPointId());
-        Vehicle vehicle = event.getVehicle();
+   public void addVehicleToQueue(Vehicle vehicle, double currentTime) {
 
-        if (point == null || vehicle == null) return;
+    if (vehicle == null) return;
 
-        vehicle.setStatus(VehicleStatus.FINISHED);
+    vehicle.setStatus(VehicleStatus.WAITING);
+
+    waitingQueue.addVehicle(vehicle, currentTime);
+}
+public void addVehicleToQueue(Vehicle vehicle) {
+    addVehicleToQueue(vehicle, 0);
+}
+    public Vehicle getNextInQueue() {
+        return waitingQueue.getNextVehicle();
+    }
+
+    public SmartQueue getWaitingQueue() {
+        return waitingQueue;
+    }
+
+   public void reset() {
+
+    waitingQueue.clear();
+
+    for (ChargingPoint point : chargingPoints) {
         point.disconnectVehicle();
     }
-
-// REBALANCEAMENTO
-
-   public boolean rebalancePower() {
-    return energyManager.rebalancePower(chargingPoints);
 }
 
-// RESET
+    private void printPowerDistribution() {
 
-    public void reset() {
-
-        waitingQueue.clear();
+        System.out.println("\n===== POWER =====");
 
         for (ChargingPoint point : chargingPoints) {
-            point.disconnectVehicle();
-            point.release();
+            if (point.getConnectedVehicle() != null) {
+                System.out.println(
+                        "Ponto " + point.getId() +
+                        " -> " + point.getCurrentPower()
+                );
+            }
         }
+
+        System.out.println("=================\n");
     }
-
-// GETTERS
-
 
     public double getEnergyPrice() {
         return energyPrice;
-    }
-
-    public List<ChargingPoint> getChargingPoints() {
-        return chargingPoints;
-    }
-    public SmartQueue getWaitingQueue() {
-        return this.waitingQueue;
     }
 }

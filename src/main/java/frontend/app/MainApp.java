@@ -1,6 +1,7 @@
 package frontend.app;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import backend.core.AppController;
 import frontend.controllers.MainViewController;
@@ -8,49 +9,62 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 
 public class MainApp extends Application {
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public void start(Stage primaryStage) {
-        try {
-            System.out.println("Inicializando ecossistema Smart Charge Station...");
 
-            // 1. INICIALIZA O MOTOR DO BACKEND
+        try {
             backend.core.Application backendCore = new backend.core.Application();
             AppController appController = backendCore.getAppController();
 
-            // 2. CARREGA O ARQUIVO FXML DA VIEW PRINCIPAL
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    Objects.requireNonNull(getClass().getResource("/views/MainView.fxml"))
+            );
+
             Parent root = loader.load();
 
-            // 3. CAPTURA O CONTROLLER DA TELA
-            MainViewController viewController = loader.getController();
+            MainViewController controller = loader.getController();
+            controller.setAppController(appController);
 
-            // 4. FAZ O ACOPLAMENTO EM MÃO DUPLA
-            viewController.setAppController(appController);
-            appController.setViewController(viewController);
+            primaryStage.setTitle("Smart Charge Station");
 
-            // 5. CONFIGURA E EXIBE A JANELA PRINCIPAL
-            primaryStage.setTitle("Smart Charge Station - MVP Simulation");
-            primaryStage.setScene(new Scene(root, 1024, 768));
-            
-            primaryStage.setOnCloseRequest(event -> {
-                System.out.println("Interface fechada pelo usuário. Encerrando simulação...");
-                System.exit(0);
-            });
+            primaryStage.getIcons().addAll(
 
+    new Image(
+        Objects.requireNonNull(
+            getClass().getResourceAsStream("/assets/images/icon16x16.png")
+        )
+    ),
+
+    new Image(
+        Objects.requireNonNull(
+            getClass().getResourceAsStream("/assets/images/icon32x32.png")
+        )
+    ),
+
+    new Image(
+        Objects.requireNonNull(
+            getClass().getResourceAsStream("/assets/images/icon144x144.png")
+        )
+    ),
+
+    new Image(
+        Objects.requireNonNull(
+            getClass().getResourceAsStream("/assets/images/icon512x512.png")
+        )
+    )
+);
+
+            primaryStage.setScene(new Scene(root, 1400, 750));
             primaryStage.show();
-            System.out.println("Janela carregada e loop de simulação ativo.");
 
         } catch (IOException e) {
-            System.err.println("ERRO CRÍTICO AO INICIALIZAR A APLICAÇÃO:");
+            e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -3,218 +3,156 @@ package backend.simulator;
 import java.util.PriorityQueue;
 
 import backend.config.SimulationConfig;
+import backend.core.TimeSystem;
 import backend.fleetmanager.FleetManager;
 import backend.fleetmanager.Vehicle;
-import backend.fleetmanager.VehicleModel;
 import backend.stationmanager.ChargingPoint;
 import backend.stationmanager.StationManager;
 
-// Classe principal do motor de simulação discreta e contínua.
 public class Simulator {
 
-    // ATRIBUTOS
     private double simulationTime;
+    private boolean started = false;
+
     private final PriorityQueue<Event> eventQueue;
     private final StationManager stationManager;
     private final FleetManager fleetManager;
-    private boolean isRunning;
-
-    // CONSTRUTOR
-
+    private final TimeSystem timeSystem;
+    private final EventLogger eventLogger; // Novo atributo
 
     public Simulator() {
         this.simulationTime = 0.0;
         this.eventQueue = new PriorityQueue<>();
         this.stationManager = new StationManager();
         this.fleetManager = new FleetManager();
-        this.isRunning = false;
+        this.timeSystem = new TimeSystem();
+        this.eventLogger = new EventLogger(); // Inicializado
     }
 
-    // INICIALIZAÇÃO
+    // ----------------------------
+    // CONTROLE PRINCIPAL
+    // ----------------------------
+
+    public void startSimulation() {
+        if (!started) {
+            initializeSimulation();
+            started = true;
+            eventLogger.log("Simulação iniciada.");
+        }
+    }
 
     public void initializeSimulation() {
-        this.simulationTime = 0.0;
-        this.eventQueue.clear();
-        this.stationManager.reset();
-        this.fleetManager.reset();
-        this.isRunning = true;
-
-        System.out.println("Simulador inicializado.");
-
-        // 1. Agenda a frota vinda do FleetManager na linha do tempo
+        reset();
         scheduleArrivals();
-
-        // 2. Injeção de segurança para carregar a UI com dados simulados reais logo no início
-        try {
-            if (!fleetManager.getAvailableModels().isEmpty()) {
-                // Captura um modelo de veículo real existente no seu ecossistema para evitar erros de construtor
-                VehicleModel modeloReal = fleetManager.getAvailableModels().get(0);
-                
-                Vehicle carroTeste1 = new Vehicle(99, modeloReal, "Vermelho", 20.0, 0.0);
-                Vehicle carroTeste2 = new Vehicle(100, modeloReal, "Prata", 45.0, 0.0);
-
-                ChargingPoint posto1 = this.stationManager.getPointById(1);
-                ChargingPoint posto2 = this.stationManager.getPointById(2);
-
-                if (posto1 != null) posto1.connectVehicle(carroTeste1);
-                if (posto2 != null) posto2.connectVehicle(carroTeste2);
-
-                this.stationManager.rebalancePower();
-                System.out.println("[DEBUG] Cenário de teste acoplado nos postos com modelos reais.");
-            }
-        } catch (Exception e) {
-            System.err.println("Aviso ao injetar dados iniciais na UI: " + e.getMessage());
-        }
+        eventLogger.log("Simulação inicializada e cenário montado.");
     }
 
-
-    // Lógica padrão de agendamento 
-    private void scheduleArrivals() {
-        double time = 0.0;
-
-        for (Vehicle vehicle : fleetManager.getVehicles()) {
-            if (!SimulationConfig.STRESS_TEST_MODE) {
-                time += SimulationConfig.ARRIVAL_INTERVAL;
-            }
-
-            scheduleEvent(new Event(
-                time,
-                EventType.VEHICLE_ARRIVAL,
-                vehicle
-            ));
-        }
+    public void reset() {
+        simulationTime = 0.0;
+        eventQueue.clear();
+        stationManager.reset();
+        fleetManager.reset();
+        started = false;
+        eventLogger.log("Sistema resetado.");
     }
 
-    // CICLO DE EXECUÇÃO DO LOOP DE ATUALIZAÇÃO CONTÍNUA)
-    
-    public void update(double deltaTime) {
-        if (!isRunning) return;
+    // ----------------------------
+    // LOOP PRINCIPAL
+    // ----------------------------
 
-        // Avança o relógio mestre da simulação
-        this.simulationTime += deltaTime;
+    public void update(double deltaRealTime) {
+        timeSystem.update(deltaRealTime);
+        double deltaSim = timeSystem.getDeltaSimulationTime();
+        simulationTime = timeSystem.getAccumulatedSimulationTime();
 
-        while (!eventQueue.isEmpty() && eventQueue.peek().getTimestamp() <= this.simulationTime) {
-            Event event = eventQueue.poll();
-            processEvent(event);
+        while (!eventQueue.isEmpty() && eventQueue.peek().getTimestamp() <= simulationTime) {
+            processEvent(eventQueue.poll());
         }
 
-        // Executa o algoritmo contínuo de divisão de potência da subestação
-        this.stationManager.rebalancePower();
-
-        // 3. Incrementa a recarga dos carros frame a frame
-        updateContinuousCharging(deltaTime);
+        stationManager.getWaitingQueue().updatePriorities(simulationTime);
+        updateContinuousCharging(deltaSim);
     }
 
-     // Abastece continuamente as baterias dos veículos que estão conectados aos totens ativos.
-    private void updateContinuousCharging(double deltaTime) {
-        double deltaHours = deltaTime / 3600.0;
-
-        for (int i = 1; i <= SimulationConfig.MAX_CHARGING_POINTS; i++) {
-            ChargingPoint point = stationManager.getPointById(i);
-            
-            if (point != null && point.isOccupied()) {
-                Vehicle vehicle = point.getConnectedVehicle();
-                if (vehicle != null) {
-                    double currentPower = point.getCurrentPower() > 0 
-                            ? point.getCurrentPower() 
-                            : SimulationConfig.DEFAULT_CHARGING_POWER;
-
-                    double energyTransferred = currentPower * deltaHours;
-                    vehicle.updateEnergy(energyTransferred);
-                }
-            }
-        }
-    }
-
-    // PROCESSAMENTO DE EVENTOS
- 
     private void processEvent(Event event) {
-        if (event == null) return;
-
         switch (event.getType()) {
             case VEHICLE_ARRIVAL -> handleVehicleArrival(event.getVehicle());
-                
             case START_CHARGING -> {
                 stationManager.processChargingStart(event);
-                
-                Vehicle vehicle = event.getVehicle();
-                ChargingPoint point = stationManager.getPointById(event.getChargingPointId());
-                
-                if (point == null || vehicle == null) return;
-
-                vehicle.setStatus(backend.fleetmanager.VehicleStatus.CHARGING);
-                
-                double power = point.getCurrentPower() > 0
-                        ? point.getCurrentPower() 
-                        : SimulationConfig.DEFAULT_CHARGING_POWER;
-
-                double chargingTime = vehicle.calculateRemainingChargingTime(power);
-                
-                // CORREÇÃO: Trocado getTime() por getTimestamp()
-                double finishTimestamp = event.getTimestamp() + chargingTime;
-
-                scheduleEvent(new Event(finishTimestamp, EventType.FINISH_CHARGING, vehicle, point.getId()));
-            }
-
-            case FINISH_CHARGING -> {
-                stationManager.processChargingEnd(event);
-                checkQueueAndCharge();
-            }
-                
-            default -> {
+                eventLogger.log("Veículo " + event.getVehicle().getId() + " iniciou recarga.");
             }
         }
     }
 
     private void handleVehicleArrival(Vehicle vehicle) {
         if (vehicle == null) return;
+        
+        eventLogger.log("Veículo " + vehicle.getId() + " chegou à estação.");
 
         if (stationManager.hasCapacityFor(vehicle)) {
-            ChargingPoint availablePoint = stationManager.getAvailablePoint();
-            if (availablePoint != null) {
-                Event startEvent = new Event(this.simulationTime, EventType.START_CHARGING, vehicle, availablePoint.getId());
-                processEvent(startEvent);
+            ChargingPoint point = stationManager.getAvailablePoint();
+            if (point != null) {
+                processEvent(new Event(simulationTime, EventType.START_CHARGING, vehicle, point.getId()));
                 return;
             }
         }
-        vehicle.setStatus(backend.fleetmanager.VehicleStatus.WAITING);
+        
+        eventLogger.log("Veículo " + vehicle.getId() + " entrou na fila de espera.");
         stationManager.addVehicleToQueue(vehicle);
+    }
+
+    private void updateContinuousCharging(double deltaTime) {
+        for (ChargingPoint point : stationManager.getChargingPoints()) {
+            if (!point.isOccupied()) continue;
+            point.deliverEnergy(deltaTime);
+            Vehicle v = point.getConnectedVehicle();
+
+            if (v != null && v.getStateOfCharge() >= 100.0) {
+                eventLogger.log("Veículo " + v.getId() + " concluiu a recarga.");
+                point.disconnectVehicle();
+                stationManager.rebalancePower();
+                checkQueueAndCharge();
+            }
+        }
     }
 
     private void checkQueueAndCharge() {
         while (!stationManager.getWaitingQueue().isEmpty()) {
-            Vehicle nextVehicle = stationManager.getNextInQueue();
-            if (nextVehicle == null) break;
+            Vehicle v = stationManager.getNextInQueue();
+            if (v == null) break;
 
-            if (stationManager.hasCapacityFor(nextVehicle)) {
-                ChargingPoint availablePoint = stationManager.getAvailablePoint();
-                if (availablePoint != null) {
-                    Event startEvent = new Event(this.simulationTime, EventType.START_CHARGING, nextVehicle, availablePoint.getId());
-                    processEvent(startEvent);
-                } else {
-                    nextVehicle.setStatus(backend.fleetmanager.VehicleStatus.WAITING);
-                    stationManager.addVehicleToQueue(nextVehicle);
-                    break;
-                }
-            } else {
-                nextVehicle.setStatus(backend.fleetmanager.VehicleStatus.WAITING);
-                stationManager.addVehicleToQueue(nextVehicle);
+            if (!stationManager.hasCapacityFor(v)) {
+                stationManager.addVehicleToQueue(v);
                 break;
             }
+
+            ChargingPoint p = stationManager.getAvailablePoint();
+            if (p == null) {
+                stationManager.addVehicleToQueue(v);
+                break;
+            }
+
+            processEvent(new Event(simulationTime, EventType.START_CHARGING, v, p.getId()));
         }
     }
 
-  
-    // GETTERS & UTILS
+    // ----------------------------
+    // GETTERS E LOGGERS
+    // ----------------------------
+
+    public StationManager getStationManager() { return stationManager; }
+    public double getSimulationTime() { return simulationTime; }
+    public FleetManager getFleetManager() { return fleetManager; }
+    public EventLogger getEventLogger() { return eventLogger; } // Agora existe!
 
     public void scheduleEvent(Event event) {
-        if (event != null) {
-            eventQueue.add(event);
+        if (event != null) eventQueue.add(event);
+    }
+    
+    private void scheduleArrivals() {
+        double time = 0.0;
+        for (Vehicle vehicle : fleetManager.getVehicles()) {
+            if (!SimulationConfig.STRESS_TEST_MODE) time += SimulationConfig.ARRIVAL_INTERVAL;
+            scheduleEvent(new Event(time, EventType.VEHICLE_ARRIVAL, vehicle));
         }
     }
-
-    public StationManager getStationManager() { return this.stationManager; }
-    public double getSimulationTime() { return this.simulationTime; }
-    public boolean isRunning() { return this.isRunning; }
-    public FleetManager getFleetManager() { return this.fleetManager; }
 }

@@ -1,12 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ProgressBar?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="150.0" spacing="10.0" style="-fx-background-color: #1e232b; -fx-background-radius: 8px; -fx-padding: 10px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ChargingPointCardController">
-   <children>
-      <Label fx:id="lblNomePosto" text="Ponto #X" />
-      <Label fx:id="lblStatusPosto" text="Livre" />
-      <Label fx:id="lblPotenciaPosto" text="0.0 kW" />
-   </children>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="frontend.controllers.ChargingPointCardController"
+      spacing="10"
+      prefWidth="240"
+      prefHeight="180"
+      style="-fx-background-color: #1b1f27;
+             -fx-background-radius: 14;
+             -fx-padding: 12;
+             -fx-border-color: #2c3340;
+             -fx-border-radius: 14;">
+
+    <!-- TOPO -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+
+        <ImageView fx:id="imgPlug" fitHeight="22" fitWidth="22"/>
+
+        <Label fx:id="lblNomePosto"
+               text="POSTO 1"
+               style="-fx-text-fill: white;
+                      -fx-font-weight: bold;
+                      -fx-font-size: 14px;"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Label fx:id="lblStatusPosto"
+               text="LIVRE"
+               style="-fx-background-color: #2ecc71;
+                      -fx-text-fill: black;
+                      -fx-padding: 4 8;
+                      -fx-background-radius: 8;
+                      -fx-font-size: 12px;
+                      -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- ÁREA DO VEÍCULO -->
+    <HBox spacing="10">
+
+        <ImageView fx:id="imgCar"
+                   fitHeight="85"
+                   fitWidth="130"
+                   preserveRatio="true"/>
+
+        <VBox spacing="3">
+
+            <Label fx:id="lblVehicleName"
+                   style="-fx-text-fill: white;
+                          -fx-font-weight: bold;"/>
+
+            <Label fx:id="lblVehicleModel"
+                   style="-fx-text-fill: #aaaaaa;
+                          -fx-font-size: 12px;"/>
+
+            <ProgressBar fx:id="progressBattery"
+             prefWidth="120"
+             style="-fx-accent: #39FF14;"/>
+
+            <Label fx:id="lblBattery"
+                   style="-fx-text-fill: #cccccc;
+                          -fx-font-size: 12px;"/>
+        </VBox>
+    </HBox>
+
+    <!-- POTÊNCIA -->
+    <Label fx:id="lblPotenciaPosto"
+           style="-fx-text-fill: #00e5ff;
+                  -fx-font-size: 12px;
+                  -fx-font-weight: bold;"/>
 </VBox>

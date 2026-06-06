@@ -38,17 +38,13 @@ public class CompactModel
     }
 
 
-// POLIMORFISMO
+@Override
+public int getVisualIndex() {
+    return 1;
+}
 
-
-    // Descrição especializada do modelo
     @Override
     public String getModelDescription() {
-
-        return
-                "Hatchback compacto urbano — "
-                        + "bateria de 38 kWh, "
-                        + "carregamento AC de até 40 kW. "
-                        + "Ideal para uso urbano.";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

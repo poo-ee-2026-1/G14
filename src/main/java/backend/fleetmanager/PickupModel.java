@@ -40,7 +40,10 @@ public class PickupModel
 
 
 // POLIMORFISMO
-
+@Override
+public int getVisualIndex() {
+    return 4;
+}
 
     // Retorna uma descrição específica da caminhonete.
     @Override

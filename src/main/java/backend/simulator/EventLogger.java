@@ -7,41 +7,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 // Classe responsável por registrar eventos da simulação
 public class EventLogger {
-
-
-// CONSTANTES
-
-    // Prefixo padrão das mensagens
     private static final String LOG_PREFIX = "[LOG]: ";
+    
+    // Mude para ObservableList
+    private final ObservableList<String> eventLog = FXCollections.observableArrayList();
 
-// ATRIBUTOS
+    public void log(String message) {
+        // Platform.runLater é necessário se o log vier de uma thread de background
+        javafx.application.Platform.runLater(() -> {
+            eventLog.add(0, message); // Adiciona no topo
+            System.out.println(LOG_PREFIX + message);
+        });
+    }
 
-// Lista que armazena os registros da simulação
-    private final List<String> eventLog;
-
-// CONSTRUTOR
-
-
-    // Construtor padrão do logger
-    public EventLogger() {
-
-        // Inicializa lista vazia
-        this.eventLog = new ArrayList<>();
+    public ObservableList<String> getEventLog() {
+        return eventLog;
     }
 
 // MÉTODOS PRINCIPAIS
-
-    // Registra uma nova mensagem no sistema
-    public void log(String message) {
-
-        // Adiciona mensagem à lista
-        eventLog.add(message);
-
-        // Exibe mensagem no console
-        System.out.println(LOG_PREFIX + message);
-    }
 
     // Remove todos os logs armazenados
     public void clearLog() {

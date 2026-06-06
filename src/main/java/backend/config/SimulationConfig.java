@@ -12,7 +12,7 @@ public class SimulationConfig {
     // =========================================================================
     
     public static final boolean STRESS_TEST_MODE = false;
-    public static final double ARRIVAL_INTERVAL = 300.0;
+    public static final double ARRIVAL_INTERVAL = 1.0;
 
     // =========================================================================
     //  PARÂMETROS DA ESTAÇÃO E POTÊNCIA

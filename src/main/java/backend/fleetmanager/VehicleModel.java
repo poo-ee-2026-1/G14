@@ -4,23 +4,20 @@ package backend.fleetmanager;
 
 public abstract class VehicleModel {
 
-// ATRIBUTOS
+    // ATRIBUTOS
 
-    // Nome do modelo
     private final String name;
-
-    // Capacidade máxima da bateria (kWh)
     private final double batteryCapacity;
-
-    // Potência máxima suportada no carregamento (kW)
     private final double maxChargingPower;
-
-    // Código do modelo
     private final String modelCode;
+  
 
-// CONSTRUTOR
+    // CONTADOR DE INSTÂNCIAS
 
-    // Construtor base do modelo
+    private int instanceCount = 0;
+
+    // CONSTRUTOR
+
     public VehicleModel(
             String name,
             double batteryCapacity,
@@ -28,75 +25,65 @@ public abstract class VehicleModel {
             String modelCode
     ) {
 
-        // Define nome
         this.name = name;
 
-        // Garante capacidade válida
         this.batteryCapacity =
                 Math.max(
                         batteryCapacity,
                         0.0
                 );
 
-        // Garante potência válida
         this.maxChargingPower =
                 Math.max(
                         maxChargingPower,
                         0.0
                 );
 
-        // Define código do modelo
         this.modelCode = modelCode;
     }
 
-// MÉTODOS 
+    // MÉTODOS ABSTRATOS
 
-    // Cada modelo deve possuir sua própria descrição.
-    public abstract String
-    getModelDescription();
+    public abstract String getModelDescription();
 
-// CONTADOR DE INSTÂNCIAS
+    // Índice visual usado para carregar PNG correto
+    public abstract int getVisualIndex();
 
-private int instanceCount = 0;
+    // CONTADOR
 
-public int generateNextId() {
+    public int generateNextId() {
 
-    instanceCount++;
+        instanceCount++;
 
-    int idBase = Integer.parseInt(modelCode);
+        int idBase =
+                Integer.parseInt(modelCode);
 
-    return (idBase * 100) + instanceCount;
-}
+        return
+                (idBase * 100)
+                        +
+                        instanceCount;
+    }
 
-// Reinicia contador do modelo
-public void resetInstanceCount() {
+    public void resetInstanceCount() {
 
-    instanceCount = 0;
-}
+        instanceCount = 0;
+    }
 
-// GETTERS
+    // GETTERS
 
-    // Retorna nome do modelo
     public String getName() {
-
         return name;
     }
 
-    // Retorna capacidade da bateria
     public double getBatteryCapacity() {
-
         return batteryCapacity;
     }
 
-    // Retorna potência máxima
     public double getMaxChargingPower() {
-
         return maxChargingPower;
     }
 
-    // Retorna código do modelo
     public String getModelCode() {
-
         return modelCode;
     }
 }

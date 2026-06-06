@@ -38,6 +38,7 @@ public class SmartQueue {
 }
 
     // Adiciona veículo na fila
+    // Adiciona veículo na fila
 public void addVehicle(Vehicle vehicle, double currentTime) {
 
     if (vehicle == null) return;
@@ -49,7 +50,6 @@ public void addVehicle(Vehicle vehicle, double currentTime) {
 public void addVehicle(Vehicle vehicle) {
     addVehicle(vehicle, 0);
 }
-
     // Retorna veículo de maior prioridade
     public Vehicle getNextVehicle() {
 
@@ -153,6 +153,9 @@ public void addVehicle(Vehicle vehicle) {
 
         queue.clear();
     }
+    public int size() {
+    return queue.size();
+}
 
 // RETORNA COPIA DA FILA ORDENADA
 
@@ -166,5 +169,8 @@ public List<Vehicle> getVehicles() {
         sortedList.add(copy.poll());
     }
     return sortedList;
+}
+public void refresh(double currentTime) {
+    updatePriorities(currentTime);
 }
 }

@@ -37,6 +37,10 @@ public class SUVModel
     }
 
 // POLIMORFISMO
+@Override
+public int getVisualIndex() {
+    return 3;
+}
 
     // Retorna descrição especializada para veículos SUV.
     @Override

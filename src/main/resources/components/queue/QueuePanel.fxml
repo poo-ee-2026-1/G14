@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="frontend.controllers.QueuePanelController"
+      VBox.vgrow="ALWAYS"
+      spacing="8"
+      styleClass="queue-panel">
+      
+
+    <Label text="FILA DE EVENTOS"
+           style="-fx-text-fill:#39FF14;
+                  -fx-font-size:14px;
+                  -fx-font-weight:bold;"/>
+
+    <ListView fx:id="queueList"
+          VBox.vgrow="ALWAYS"
+          styleClass="queue-list"/>
+
+</VBox>

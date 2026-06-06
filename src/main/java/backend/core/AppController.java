@@ -1,65 +1,62 @@
 package backend.core;
 
-import backend.config.SimulationConfig;
 import backend.simulator.Simulator;
-import frontend.controllers.MainViewController;
 
 public class AppController {
 
-    // Simulador principal
     private final Simulator simulator;
-
-    // Sistema de tempo
-    private final TimeSystem timeSystem;
-
-    // Referência para o controlador da Interface Gráfica (JavaFX)
-    private MainViewController viewController;
+    private boolean paused;
+    private boolean started;
 
     public AppController() {
-        // Inicializa sistema temporal
-        this.timeSystem = new TimeSystem();
-
-        // Inicializa simulador
         this.simulator = new Simulator();
-
-        // Inicializa simulação
-        simulator.initializeSimulation();
+        this.started = false;
+        this.paused = false;
+        System.out.println("[DEBUG] AppController criado -> " + this);
     }
 
-    public void setViewController(MainViewController viewController) {
-        this.viewController = viewController;
-    }
-
-
-     // Atualiza a física do tempo e processa os eventos do simulador.
-    public void update() {
-        // Delta de tempo real
-        double deltaRealTime = SimulationConfig.DEFAULT_REAL_DELTA_TIME;
-
-        // Atualiza relógio
-        timeSystem.update(deltaRealTime);
-
-        // Obtém delta simulado
-        double deltaSimulationTime = timeSystem.getDeltaSimulationTime();
-
-        // Atualiza simulador
-        simulator.update(deltaSimulationTime);
-    }
-
-     // Delega a atualização visual para a interface JavaFX caso ela esteja conectada.
- 
-    public void render() {
-        if (viewController != null) {
-            viewController.atualizarInterfaceGeral();
+    public void startSimulation() {
+        System.out.println("[APP] START -> " + simulator);
+        if (!started) {
+            simulator.initializeSimulation();
+            started = true;
         }
+        paused = false;
+        System.out.println("[DEBUG] start");
     }
-    // GETTERS
+
+    public void togglePause() {
+        if (!started) {
+            return;
+        }
+        paused = !paused;
+        System.out.println(paused ? "[SIM] PAUSED" : "[SIM] RUNNING");
+    }
+
+    public void resetSimulation() {
+        System.out.println("[APP] RESET -> " + simulator);
+        simulator.reset();
+        simulator.initializeSimulation();
+        started = false;
+        paused = false;
+    }
+
+    public void update(double deltaTime) {
+        if (!started || paused) {
+            return; // Se não começou ou está pausado, não faz nada
+        }
+        simulator.update(deltaTime);
+    }
 
     public Simulator getSimulator() {
         return simulator;
     }
 
-    public TimeSystem getTimeSystem() {
-        return timeSystem;
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public boolean isStarted() {
+        return started;
     }
 }

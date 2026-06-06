@@ -1,70 +1,68 @@
-package backend.core;
-public class GameLoop {
+ package backend.core;
+ public class GameLoop {
 
 // ATRIBUTOS
 
     // Estado do loop
-    private boolean running;
+   // private boolean running;
 
     // Controlador central
-    private final AppController controller;
+   // private final AppController controller;
 
 // CONSTRUTOR
 
-    public GameLoop(
-            AppController controller
-    ) {
+   // public GameLoop(
+            //AppController controller
+    //) {
 
-        this.controller =
-                controller;
+        //this.controller =
+                //controller;
 
-        this.running =
-                false;
-    }
+        //this.running =
+              //  false;
+  //  }
 
 
 // MÉTODO START
 
     // Inicia execução
-    public void start() {
+    //public void start() {
 
-        running = true;
+       // running = true;
 
-        System.out.println(
-                "Sistema iniciado."
-        );
+        //System.out.println(
+               // "Sistema iniciado."
+       // );
 
-        run();
-    }
+        //run();
+    //}
 
 // LOOP PRINCIPAL
 
-    private void run() {
+    //private void run() {
 
-        while (running) {
+      //  while (running) {
 
-            update();
+            //update();
 
-            render();
-        }
-    }
+            //render();
+       // }
+   // }
 
-    private void update() {
+   // private void update() {
 
-        controller.update();
-    }
+   // }
 
-    private void render() {
+   // private void render() {
 
-        controller.render();
-    }
+    //}
 
-    public void stop() {
+    //public void stop() {
 
-        running = false;
+        //running = false;
 
-        System.out.println(
-                "Sistema encerrado."
-        );
-    }
+       // System.out.println(
+                //"Sistema encerrado."
+       // );
+    //}
 }
